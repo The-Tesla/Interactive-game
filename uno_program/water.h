@@ -10,18 +10,25 @@ int nb_filter() {
   return f_number;
 }
 
-int set_pump() {
+void set_pump() {
   pinMode(6, OUTPUT);
   digitalWrite(6, 1);
 }
 
-int start_waterpump() {
-  if (nb_filter() == 2 && pump_started == 0) {
-    start_time == millis();
+void start_waterpump(int detect) {
+
+  if (detect >= 2 && pump_started == 0) {
+    start_time = millis();
     pump_started = 1;
   }
-  if (nb_filter() == 2 && millis() - start_time < 1000)
+  else if (detect >= 2 &&  millis() - start_time < 1500)
+  {
     digitalWrite(6, 0);
+  }
+  else digitalWrite(6, 1);
+
+
 }
+
 
 

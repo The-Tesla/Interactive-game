@@ -7,7 +7,6 @@
 
 int air = 0, solar = 0, earth = 0, water = 0;
 
-
 void setup() {
   set_led();
   set_pump();
@@ -17,7 +16,6 @@ void setup() {
 
 
 void loop() {
-  set_pump();
   for (int i = 2; i <= 5; i++)// set pin 2 - 5 to 0
   {
     digitalWrite(i, 0);
@@ -28,6 +26,7 @@ void loop() {
   air = nb_tree();
   earth = nb_earth1();
   light_led(solar);
-  start_waterpump();
-  json_message(solar, water, air, earth);
+  start_waterpump(water);
+  json_message(solar, air, water, earth);
+
 }
