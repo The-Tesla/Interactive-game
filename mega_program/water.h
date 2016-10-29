@@ -10,10 +10,8 @@ int s=analogRead(A2);
 return f_number;}
 
 int set_pump(){
-pinMode(2,OUTPUT);
-pinMode(3,OUTPUT);
-digitalWrite(2,1);
-digitalWrite(3,1);
+pinMode(A9,OUTPUT);
+digitalWrite(A9,1);
 }
 
 void start_waterpump(int detect) {
@@ -23,13 +21,8 @@ void start_waterpump(int detect) {
   }
   else if (detect >= 2 &&  millis() - start_time < 1500)
   {
-    digitalWrite(6, 0);
+    digitalWrite(A9, 0);
   }
-  else digitalWrite(6, 1);
-}
-
-int start_airpump(){
-if (nb_filter()==2)
-digitalWrite(3,0);
+  else digitalWrite(A9, 1);
 }
 

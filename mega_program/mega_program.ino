@@ -4,7 +4,6 @@
 #include "water.h" //connected to A2
 #include "earth.h" //connected to A3 A4 A5 A6 A7
 #include "json.h"
-int num[2] = {0}; // storing digits values
 int air = 0, solar = 0, earth1 = 0,earth2 = 0,earth3 = 0,water = 0;
 
 
@@ -30,5 +29,6 @@ void loop() {
   light_led(solar);
   start_waterpump(water);
   json_message(solar, air, water, earth1,earth2,earth3);
+  delay(1000);
 
 }
