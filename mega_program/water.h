@@ -1,5 +1,5 @@
 #include "arduino.h"
-int f_number=0;
+int f_number=0, start_time = 0, pump_started = 0;
 
 // read filters 
 int nb_filter(){
@@ -16,28 +16,20 @@ digitalWrite(2,1);
 digitalWrite(3,1);
 }
 
-int start_waterpump(){
-if (nb_filter()==2)
-digitalWrite(2,0);
+void start_waterpump(int detect) {
+  if (detect >= 2 && pump_started == 0) {
+    start_time = millis();
+    pump_started = 1;
+  }
+  else if (detect >= 2 &&  millis() - start_time < 1500)
+  {
+    digitalWrite(6, 0);
+  }
+  else digitalWrite(6, 1);
 }
 
 int start_airpump(){
 if (nb_filter()==2)
 digitalWrite(3,0);
 }
-
-//// detect if a filtering circuit is complete 
-//boolean pump=LOW,lastpump=LOW;
-//int detect(){
-//  int f1=0,f2=0,f3=0,f4=0;
-//  f1=nb_filter_1();
-//  f2=nb_filter_2();
-//  f3=nb_filter_3();
-//  f4=nb_filter_4();
-// if(f1==f2 && f1==f3 && f1==f4 && lastpump==LOW){
-// pump=!pump;
-// digitalWrite(13,pump); // connect the pump le pin 13 
-// delay(500); 
-// lastpump=HIGH;}
-// else if(lastpump==HIGH) {pump=!pump;lastpump=LOW;}}
 
